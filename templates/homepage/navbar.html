@@ -1,13 +1,14 @@
-<!--- header -->
-<header class="header">
+<!-- Header -->
+
+	<header class="header">
 
 		<!-- Top Bar -->
 
 		<div class="top_bar">
-			<div class="container">	
+			<div class="container">
 				<div class="row">
 					<div class="col d-flex flex-row">
-						<div class="top_bar_contact_item"><div class="top_bar_icon"><img src="images/phone.png" alt=""></div>+84 388 938 294</div>
+						<div class="top_bar_contact_item"><div class="top_bar_icon"><img src="images/phone.png" alt=""></div>+38 068 005 3570</div>
 						<div class="top_bar_contact_item"><div class="top_bar_icon"><img src="images/mail.png" alt=""></div><a href="mailto:fastsales@gmail.com">fastsales@gmail.com</a></div>
 						<div class="top_bar_content ml-auto">
 							<div class="top_bar_menu">
@@ -32,11 +33,8 @@
 							</div>
 							<div class="top_bar_user">
 								<div class="user_icon"><img src="images/user.svg" alt=""></div>
-								{% if user.username %}
-									<p>Hello {{user.username}}<a href="{% url 'logout' %}">Logout</a></p>
-								{% else %}
-                					<p><a href="{% url 'login' %}">Login</a><a href="{% url 'register' %}">Register</a> </p>
-            					{% endif %}
+								<div><a href="#">Register</a></div>
+								<div><a href="#">Sign in</a></div>
 							</div>
 						</div>
 					</div>
@@ -62,7 +60,7 @@
 						<div class="header_search">
 							<div class="header_search_content">
 								<div class="header_search_form_container">
-									<form action="{% url 'search' %}" class="header_search_form clearfix">
+									<form action="#" class="header_search_form clearfix">
 										<input type="search" required="required" class="header_search_input" placeholder="Search for products...">
 										<div class="custom_dropdown">
 											<div class="custom_dropdown_list">
@@ -202,7 +200,7 @@
 										<a href="#">Pages<i class="fas fa-chevron-down"></i></a>
 										<ul>
 											<li><a href="shop.html">Shop<i class="fas fa-chevron-down"></i></a></li>
-											<li><a href="{% url 'product'%}">Product<i class="fas fa-chevron-down"></i></a></li>
+											<li><a href="product.html">Product<i class="fas fa-chevron-down"></i></a></li>
 											<li><a href="blog.html">Blog<i class="fas fa-chevron-down"></i></a></li>
 											<li><a href="blog_single.html">Blog Post<i class="fas fa-chevron-down"></i></a></li>
 											<li><a href="regular.html">Regular Post<i class="fas fa-chevron-down"></i></a></li>
