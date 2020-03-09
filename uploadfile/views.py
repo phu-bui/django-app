@@ -12,6 +12,7 @@ def category_upload(request):
     }
     if request.method == "GET":
         return render(request, template, prompt)
+
     csv_file = request.FILES['file']
     if not csv_file.name.endswith('.csv'):
         messages.error(request, 'This is not a csv file')
