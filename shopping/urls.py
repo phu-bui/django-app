@@ -10,5 +10,6 @@ urlpatterns = [
     path('', include('core.urls')),
     path('', include('product.urls')),
     path('', include('search.urls')),
+    path('', include('uploadfile.urls'))
 ]
 

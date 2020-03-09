@@ -9,6 +9,9 @@ class HomeView(View):
     def get(self, request):
         return render(request, 'homepage/index.html')
 
+def contact(request):
+    return render(request, 'homepage/contact.html')
+
 def register(request):
     form = RegistrationForms()
     if request.method == 'POST':

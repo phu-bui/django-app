@@ -2,14 +2,16 @@ from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from .models import Product
+
 from .serializers import GetAllProductSerializers
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 from itertools import chain
 from django.shortcuts import render, get_object_or_404
-from django.db.models import Q
 from django.core.paginator import Paginator
-
+from .models import *
+from django.contrib import messages
+from django.http import HttpResponseRedirect
+from django.db.models import Q
 class GetAllProductAPIView(APIView):
 
     def get(self, request):
@@ -26,36 +28,101 @@ class ProductListView(ListView):
     context_object_name = 'Product'
     paginate_by = 10
 
-def product(request, pk):
-    product = get_object_or_404(Product, pk = pk)
-    return render(request, "product/product_detail.html", {"post": product})
+class ProductDetailView(DetailView):
+    model = Product
+    template_name = 'product/product_detail.html'
 
-class SearchView(ListView):
-    template_name = 'search/view.html'
-    paginate_by = 20
-    count = 0
+class ComputersAndLaptopstListView(ListView):
+    queryset = Product.objects.filter(category__title='Computers And Laptops')
+    template_name = 'product/product.html'
+    context_object_name = 'Product'
+    paginate_by = 10
 
-    def get_context_data(self, *args, **kwargs):
-        context = super().get_context_data(*args, **kwargs)
-        context['count'] = self.count or 0
-        context['query'] = self.request.GET.get('q')
-        return context
+class CamerasAndPhotosListView(ListView):
+    queryset = Product.objects.filter(category__title='Cameras And Photos')
+    template_name = 'product/product.html'
+    context_object_name = 'Product'
+    paginate_by = 10
 
-    def get_queryset(self):
-        request = self.request
-        query = request.GET.get('q', None)
+class HardwareListView(ListView):
+    queryset = Product.objects.filter(category__title='Hardware')
+    template_name = 'product/product.html'
+    context_object_name = 'Product'
+    paginate_by = 10
 
-        if query is not None:
-            blog_results = Product.objects.search(query)
+class SmartphonesAndTabletsListView(ListView):
+    queryset = Product.objects.filter(category__title ='Smartphones And Tablets')
+    template_name = 'product/product.html'
+    context_object_name = 'Product'
+    paginate_by = 10
+
+class TVAndAudioListView(ListView):
+    queryset = Product.objects.filter(category__title='TV And Audio')
+    template_name = 'product/product.html'
+    context_object_name = 'Product'
+    paginate_by = 10
+
+class GadgetsListView(ListView):
+    queryset = Product.objects.filter(category__title='Gadgets')
+    template_name = 'product/product.html'
+    context_object_name = 'Product'
+    paginate_by = 10
+
+class CarElectronicsListView(ListView):
+    queryset = Product.objects.filter(category__title='Car Electronics')
+    template_name = 'product/product.html'
+    context_object_name = 'Product'
+    paginate_by = 10
+
+class VideogamesAndConsolesListView(ListView):
+    queryset = Product.objects.filter(category__title='Videogames And Consoles')
+    template_name = 'product/product.html'
+    context_object_name = 'Product'
+    paginate_by = 10
+
+class AccessoriesListView(ListView):
+    queryset = Product.objects.filter(category__title='Accessories')
+    template_name = 'product/product.html'
+    context_object_name = 'Product'
+    paginate_by = 10
+
+class AppleBrandListView(ListView):
+    queryset = Product.objects.filter(brand='Apple')
+    template_name = 'product/product.html'
+    context_object_name = 'Product'
+    paginate_by = 10
+
+class SonyBrandListView(ListView):
+    queryset = Product.objects.filter(brand='Sony')
+    template_name = 'product/product.html'
+    context_object_name = 'Product'
+    paginate_by = 10
+
+class DellBrandListView(ListView):
+    queryset = Product.objects.filter(brand='Dell')
+    template_name = 'product/product.html'
+    context_object_name = 'Product'
+    paginate_by = 10
+
+class AsusBrandListView(ListView):
+    queryset = Product.objects.filter(brand='Asus')
+    template_name = 'product/product.html'
+    context_object_name = 'Product'
+    paginate_by = 10
 
 
-            # combine querysets
-            queryset_chain = chain(
-                blog_results
-            )
-            qs = sorted(queryset_chain,
-                        key=lambda instance: instance.pk,
-                        reverse=True)
-            self.count = len(qs)  # since qs is actually a list
-            return qs
-        return Product.objects.none()  # just an empty queryset as default
+def search(request):
+    if request.method == 'POST':
+        srch = request.POST['srh']
+
+        if srch:
+            match = Product.objects.filter(Q(title__icontains=srch)|
+                                           Q(category__title__icontains=srch))
+
+            if match:
+                return render(request, 'product/search.html', {'sr':match})
+            else:
+                messages.error(request, 'no result found')
+        else:
+            return HttpResponseRedirect('/search/')
+    return render(request, 'product/search.html')

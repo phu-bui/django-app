@@ -1,0 +1,37 @@
+{% extends "homepage/index.html"%}
+{% block title %}{{product.title}}{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="col-sm-4"></div>
+    <div class="col-sm-8">
+        <div class="container-fluid">
+            {% if user.username %}
+                <table border="1px" width="300px">
+                    <tr>
+                        <td>Username</td>
+                        <td>{{user.username}}</td>
+                    </tr>
+                    <tr>
+                        <td>Email address</td>
+                        <td>{{user.email}}</td>
+                    </tr>
+                    <tr>
+                        <td>Address</td>
+                        <td>{{user.address}}</td>
+                    </tr>
+                    <tr>
+                        <td>Phone number</td>
+                        <td>{{user.phone_number}}</td>
+                    </tr>
+                </table>
+            {% else %}
+            <a href="{% url 'login' %}">Please login</a>
+			{% endif %}
+        </div>
+    </div>
+</div>
+<br/>
+{% if page_obj.has_next %}
+<a href="{{request.path}}?page={{page_obj.next_page_number}}">Trang tiếp</a>
+{% endif %}
+{% endblock %}
