@@ -9,6 +9,7 @@ from itertools import chain
 from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator
 from .models import *
+from .forms import CommentForm
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.db.models import Q
@@ -31,6 +32,22 @@ class ProductListView(ListView):
 class ProductDetailView(DetailView):
     model = Product
     template_name = 'product/product_detail.html'
+
+class PostListView(ListView):
+    queryset = Post.objects.all().order_by("-date")
+    template_name = 'product/blog.html'
+    context_object_name = 'Post'
+    paginate_by = 10
+
+def post(request, pk):
+    post = get_object_or_404(Post, pk = pk)
+    form = CommentForm()
+    if request.method == 'POST':
+        form = CommentForm(request.POST, author=request.user, post=post)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(request.path)
+    return render(request, 'product/post.html', {'post':post, 'form': form})
 
 class ComputersAndLaptopstListView(ListView):
     queryset = Product.objects.filter(category__title='Computers And Laptops')

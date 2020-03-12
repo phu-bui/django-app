@@ -203,18 +203,18 @@
 										</ul>
 									</li>
 									<li class="hassubs">
-										<a href="#">Pages<i class="fas fa-chevron-down"></i></a>
+										<a href="">Pages<i class="fas fa-chevron-down"></i></a>
 										<ul>
 											<li><a href="shop.html">Shop<i class="fas fa-chevron-down"></i></a></li>
 											<li><a href="{% url 'product' %}">Product<i class="fas fa-chevron-down"></i></a></li>
-											<li><a href="blog.html">Blog<i class="fas fa-chevron-down"></i></a></li>
-											<li><a href="blog_single.html">Blog Post<i class="fas fa-chevron-down"></i></a></li>
+											<li><a href="{% url 'blog' %}">Blog<i class="fas fa-chevron-down"></i></a></li>
+											<li><a href="">Blog Post<i class="fas fa-chevron-down"></i></a></li>
 											<li><a href="regular.html">Regular Post<i class="fas fa-chevron-down"></i></a></li>
 											<li><a href="cart.html">Cart<i class="fas fa-chevron-down"></i></a></li>
 											<li><a href="{% url 'contact' %}">Contact<i class="fas fa-chevron-down"></i></a></li>
 										</ul>
 									</li>
-									<li><a href="blog.html">Blog<i class="fas fa-chevron-down"></i></a></li>
+									<li><a href="{% url 'blog' %}">Blog<i class="fas fa-chevron-down"></i></a></li>
 									<li><a href="{% url 'contact' %}">Contact<i class="fas fa-chevron-down"></i></a></li>
 								</ul>
 							</div>
@@ -309,7 +309,7 @@
 										<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
 									</ul>
 								</li>
-								<li class="page_menu_item"><a href="blog.html">blog<i class="fa fa-angle-down"></i></a></li>
+								<li class="page_menu_item"><a href="{% url 'blog' %}">blog<i class="fa fa-angle-down"></i></a></li>
 								<li class="page_menu_item"><a href="{% url 'contact'%}">contact<i class="fa fa-angle-down"></i></a></li>
 							</ul>
 

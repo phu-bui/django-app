@@ -22,4 +22,6 @@ urlpatterns = [
     path('Sony/', SonyBrandListView.as_view(), name = 'sony'),
     path('Asus/', AsusBrandListView.as_view(), name = 'asus'),
     path('Dell/', DellBrandListView.as_view(), name = 'dell'),
+    path('Blog/', PostListView.as_view(), name = 'blog'),
+    path('Blog/<int:pk>', post, name = 'post'),
 ]
